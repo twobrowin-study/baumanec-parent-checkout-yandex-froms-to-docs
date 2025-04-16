@@ -53,11 +53,7 @@ mail_text: |
   <br/>
   <br/>
   💬 <strong>Чтобы назначить день и время встречи для приобретения путёвки, заполните короткую форму:</strong><br/>
-  {% if sub_shift_name == '1' %}
   👉 <a href="https://formdesigner.ru/form/233120-dol-baumanec-2025-1.html">Записаться на приём</a>
-  {% else %}
-  👉 <a href="https://formdesigner.ru/form/233120-dol-baumanec-2025-2.html">Записаться на приём (НЕАКТУАЛЬНАЯ ССЫЛКА)</a>
-  {% endif %}
   <br/>
   <br/>
   <br/>
