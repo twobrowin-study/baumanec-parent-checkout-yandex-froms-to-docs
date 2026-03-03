@@ -1,29 +1,32 @@
 sub_shift_name: |
-  {% if form_name == "Оформление путёвки в ДОЛ \"Бауманец\" 1 смена 2025" %}1{% else %}2{% endif %}
+  {% if form_name == "Оформление путёвки в ДОЛ \"Бауманец\" 1 смена 2026" %}1{% else %}2{% endif %}
 
 sub_shift_start_date: |
-  {% if sub_shift_name == "1" %}06{% else %}04{% endif %}
+  {% if sub_shift_name == "1" %}05{% else %}04{% endif %}
 
 sub_shift_end_date: |
-  {% if sub_shift_name == "1" %}27 июня{% else %}25 июля{% endif %}
+  {% if sub_shift_name == "1" %}26 июня{% else %}25 июля{% endif %}
 
 sub_shift_start_date_full: |
-  {% if sub_shift_name == "1" %}06 июня{% else %}04 июля{% endif %} 2025 г.
+  {% if sub_shift_name == "1" %}05 июня{% else %}04 июля{% endif %} 2026 г.
 
 sub_shift_end_date_full: |
-  {% if sub_shift_name == "1" %}27 июня{% else %}25 июля{% endif %} 2025 г.
+  {% if sub_shift_name == "1" %}26 июня{% else %}25 июля{% endif %} 2026 г.
 
 sub_parent_work_place_and_job_title: |
-  {% if parent_is_bmstu_employee %}МГТУ им. Н.Э. Баумана, {{ parent_bmstu_subdivision }}, {{ parent_bmstu_job_title }}{% else %}{{ parent_work_place }}, {{ parent_job_title }}{% endif %}
+  {{ parent_work_place }}, {{ parent_job_title }}
 
 sub_parent_passport: |
-  {{ paent_passport_sernum }}, выдан {{ parent_passport_issue }}
+  {{ parent_passport_sernum }}, выдан {{ parent_passport_issue }}
 
-sub_child_child_birth_certificate_or_passport: |
-  {% if child_has_passport %}{{ child_passport_sername }}, выдан {{ child_passport_issue }}{% else %}{{ child_birth_certificate_sernum }}, выдан {{ child_birth_certificate_issue }}{% endif %}
+sub_parent_home_address_or_empty_string: |
+  {{ parent_home_address or "" }}
 
 sub_child_child_birth_certificate: |
-  {{ child_birth_certificate_sernum }}, выдан {{ child_birth_certificate_issue }}
+  {{ child_birth_certificate_ser }} {{ child_birth_certificate_num }}, выдан {{ child_birth_certificate_issue_date }} {{ child_birth_certificate_issuer }}
+
+sub_child_child_birth_certificate_or_passport: |
+  {% if child_has_passport %}{{ child_passport_sername }}, выдан {{ child_passport_issue }}{% else %}{{ sub_child_child_birth_certificate }}{% endif %}
 
 tg_archive_name: "{{sub_shift_name}} смена {{ parent_name }} {{ child_name }}.zip"
 tg_caption_md: |
@@ -35,15 +38,15 @@ tg_caption_md: |
 mail_to:         "{{ parent_email }}"
 mail_from_alias: "Детский оздоровительный лагерь \"Бауманец\""
 mail_from_mail:  "vorontsova@bmstu.ru"
-mail_subject:    "Документы для оплаты путёвки ДОЛ \"Бауманец\" {{ child_name }} {{ sub_shift_name }} смена 2025"
+mail_subject:    "Документы для оплаты путёвки ДОЛ \"Бауманец\" {{ child_name }} {{ sub_shift_name }} смена 2026"
 mail_text: |
   Здравствуйте, {{ parent_name }}!
   <br/>
   <br/>
-  Высылаем Вам автоматически заполненные документы для оформления путёвки в ДОЛ "Бауманец": <strong>{{ child_name }} {{ sub_shift_name }} смена 2025</strong>.
+  Высылаем Вам автоматически заполненные документы для оформления путёвки в ДОЛ "Бауманец": <strong>{{ child_name }} {{ sub_shift_name }} смена 2026</strong>.
   <br/>
   <br/>
-  ⚠️ Стоимость путёвки на одну смену в 2025 году составляет 76 000 рублей.
+  ⚠️ Стоимость путёвки на одну смену в 2026 году составляет <ЦЕНА ПУТËВКИ!> рублей.
   <br/>
   <br/>
   ❗️ <strong>Пожалуйста, проверьте документы внимательно! Если Вы заметите ошибку, сообщите нам:</strong><br/>
@@ -53,13 +56,13 @@ mail_text: |
   <br/>
   <br/>
   💬 <strong>Чтобы назначить день и время встречи для приобретения путёвки, заполните короткую форму:</strong><br/>
-  👉 <a href="https://formdesigner.ru/form/233120-dol-baumanec-2025-1.html">Записаться на приём</a>
+  👉 <a href="<ССЫЛКА!!!>">Записаться на приём</a>
   <br/>
   <br/>
   <br/>
   ❗️ <strong>Внимание! Продажа путёвок строго в указанные даты:</strong><br/>
-  🔹 1 смена – только с 7 по 16 апреля 2025 года<br/>
-  🔹 2 смена – только с 21 по 30 апреля 2025 года
+  🔹 1 смена – только с 1 по 12 апреля 2026 года<br/>
+  🔹 2 смена – только с 15 по 26 апреля 2026 года
   <br/>
   <br/>
   <strong>⛔ Вне этих сроков приобрести путёвку невозможно!</strong>

@@ -91,6 +91,8 @@ def handler(event: dict, context: dict):
         MailSendDocuments(issue, documents)
         TgSendDocuments(issue, documents)
 
+    return {"statusCode": 200}
+
 
 def _key_is_answer_group(key: str) -> bool:
     """
