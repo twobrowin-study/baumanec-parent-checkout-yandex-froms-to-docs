@@ -4,7 +4,7 @@ from docx import Document, document, table
 from docx.text import paragraph
 
 
-def DocxFillTemplate(template_file_path: str, variables: dict) -> bytes:
+def docx_fill_template(template_file_path: str, variables: dict) -> bytes:
     """
     Запись в шаблон документа и возвращает его в байтовом формате
     """
@@ -19,9 +19,7 @@ def DocxFillTemplate(template_file_path: str, variables: dict) -> bytes:
                 for cell in col.cells:
                     cell: table._Cell
                     for cell_paragraph in cell.paragraphs:
-                        _replace_text_in_paragraph(
-                            cell_paragraph, variable_key, variable_value
-                        )
+                        _replace_text_in_paragraph(cell_paragraph, variable_key, variable_value)
 
     document_buf = io.BytesIO()
 

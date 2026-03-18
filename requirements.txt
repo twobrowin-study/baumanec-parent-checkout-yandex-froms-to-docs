@@ -2,4 +2,4 @@ python-dotenv
 python-docx
 Jinja2
 PyYAML
-pyTelegramBotAPI
+minio

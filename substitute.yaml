@@ -28,12 +28,7 @@ sub_child_child_birth_certificate: |
 sub_child_child_birth_certificate_or_passport: |
   {% if child_has_passport %}{{ child_passport_sername }}, выдан {{ child_passport_issue }}{% else %}{{ sub_child_child_birth_certificate }}{% endif %}
 
-tg_archive_name: "{{sub_shift_name}} смена {{ parent_name }} {{ child_name }}.zip"
-tg_caption_md: |
-  Родитель: `{{ parent_name }}`
-  Ребёнок:  `{{ child_name }}`
-  Почта:    `{{ parent_email }}`
-  Создано:  `{{ created }}`
+minio_archive_name: "{{sub_shift_name}} смена - {{ parent_name }} - {{ child_name }}.{{ created_dt }}.zip"
 
 mail_to:         "{{ parent_email }}"
 mail_from_alias: "Детский оздоровительный лагерь \"Бауманец\""

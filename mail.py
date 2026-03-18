@@ -11,7 +11,7 @@ SMTP_LOGIN = os.environ["SMTP_LOGIN"]
 SMTP_PASSWORD = os.environ["SMTP_PASSWORD"]
 
 
-def MailSendDocuments(issue: dict, documents: dict):
+def mail_send_documents(issue: dict, documents: dict):
     """
     Высылает документы по почте
     """

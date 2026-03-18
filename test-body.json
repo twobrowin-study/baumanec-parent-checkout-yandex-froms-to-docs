@@ -103,11 +103,11 @@
                     }
                 }
             },
-            "paent_passport_sernum": {
+            "parent_passport_sernum": {
                 "value": "4618 929335",
                 "question": {
                     "id": 111822104,
-                    "slug": "paent_passport_sernum",
+                    "slug": "parent_passport_sernum",
                     "options": {
                         "required": true
                     },

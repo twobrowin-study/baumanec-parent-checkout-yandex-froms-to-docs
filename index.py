@@ -2,27 +2,23 @@ import json
 import os
 from base64 import b64decode
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
-import dotenv
 import yaml
 from jinja2 import Template
 
-dotenv.load_dotenv(dotenv.find_dotenv())
+from documents import docx_fill_template
+from mail import mail_send_documents
+from minio_save import save_to_minio
 
-from documents import DocxFillTemplate  # noqa: E402
-from mail import MailSendDocuments  # noqa: E402
-from telegram import TgSendDocuments  # noqa: E402
+TZ_MSK = ZoneInfo("Europe/Moscow")
 
 
 def handler(event: dict, context: dict):
     """
     Основной обработчик событий - внешних http запросов
     """
-    body = (
-        b64decode(event["body"]).decode("utf-8")
-        if event["isBase64Encoded"]
-        else event["body"]
-    )
+    body = b64decode(event["body"]).decode("utf-8") if event["isBase64Encoded"] else event["body"]
     form_answer: dict = json.loads(body)
     print(f"FORM ANSWER:\n{json.dumps(form_answer)}")
 
@@ -34,9 +30,12 @@ def handler(event: dict, context: dict):
     ###################################
     # Подготовка основных данных
     ###################################
+    created = form_answer["answer"]["created"]
+    created_dt = datetime.fromisoformat(created).astimezone(TZ_MSK).strftime("%Y_%m%d_%H%M%S")
     issue_main = {
         "form_name": form_answer["form_name"],
-        "created": form_answer["answer"]["created"],
+        "created": created,
+        "created_dt": created_dt,
     }
 
     ###################################
@@ -75,12 +74,10 @@ def handler(event: dict, context: dict):
     ###################################
     for issue in issues:
         issue: dict
-        variables = {
-            f"{'{'}{'{'} {key} {'}'}{'}'}": f"{value}" for key, value in issue.items()
-        }
+        variables = {f"{'{'}{'{'} {key} {'}'}{'}'}": f"{value}" for key, value in issue.items()}
         template_files = os.listdir("templates")
         documents = {
-            filename: DocxFillTemplate(f"templates/{filename}", variables)
+            filename: docx_fill_template(f"templates/{filename}", variables)
             for filename in template_files
             if filename.endswith(".docx")
         }
@@ -88,8 +85,8 @@ def handler(event: dict, context: dict):
             if filename.endswith(".pdf"):
                 with open(f"templates/{filename}", "rb") as file:
                     documents |= {filename: file.read()}
-        MailSendDocuments(issue, documents)
-        TgSendDocuments(issue, documents)
+        mail_send_documents(issue, documents)
+        save_to_minio(issue, documents)
 
     return {"statusCode": 200}
 
