@@ -3,3 +3,4 @@ __pycache__
 templates
 *.zip
 .venv
+.DS_Store
