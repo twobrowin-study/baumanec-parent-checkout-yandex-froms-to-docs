@@ -2,16 +2,16 @@ sub_shift_name: |
   {% if form_name == "Оформление путёвки в ДОЛ \"Бауманец\" 1 смена 2026" %}1{% else %}2{% endif %}
 
 sub_shift_start_date: |
-  {% if sub_shift_name == "1" %}05{% else %}04{% endif %}
+  {% if sub_shift_name == "1" %}05{% else %}03{% endif %}
 
 sub_shift_end_date: |
-  {% if sub_shift_name == "1" %}26 июня{% else %}25 июля{% endif %}
+  {% if sub_shift_name == "1" %}26 июня{% else %}24 июля{% endif %}
 
 sub_shift_start_date_full: |
-  {% if sub_shift_name == "1" %}05 июня{% else %}04 июля{% endif %} 2026 г.
+  {% if sub_shift_name == "1" %}05 июня{% else %}03 июля{% endif %} 2026 г.
 
 sub_shift_end_date_full: |
-  {% if sub_shift_name == "1" %}26 июня{% else %}25 июля{% endif %} 2026 г.
+  {% if sub_shift_name == "1" %}26 июня{% else %}24 июля{% endif %} 2026 г.
 
 sub_parent_work_place_and_job_title: |
   {{ parent_work_place }}, {{ parent_job_title }}
